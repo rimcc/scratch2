@@ -30,15 +30,15 @@ private:
     AmpSessionImpl* session_;
 };
 
-class QFSessionImpl;
+class FIXSessionImpl;
 class FIXSession : public Session {
 public:
-    FIXSession() = default;
+    explicit FIXSession(char const* c);
     void logon() override;
     void subscribe() override;
     void txn(TxnBase& t) override;
 private:
-    QFSessionImpl* session_;
+    FIXSessionImpl* session_;
 };
 
 #endif //NEWTESTFRMWK_SESSION_H

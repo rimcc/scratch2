@@ -3,8 +3,14 @@
 //
 
 #include "MMOrder.h"
+#include "TxnFactory.h"
 
 namespace txn {
+    TxnBase* MMOrder::accept(TxnFactory *f)
+    {
+        return f->create(*this);
+    }
+
     MMOrder&
     MMOrder::buy()
     { m_buysell = 0;  return *this; }

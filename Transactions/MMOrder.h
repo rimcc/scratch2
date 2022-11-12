@@ -5,9 +5,13 @@
 #ifndef NEWTESTFRMWK_MMORDER_H
 #define NEWTESTFRMWK_MMORDER_H
 
+#include "TxnDetails.h"
+
 namespace txn {
 
-    class MMOrder {
+    class MMOrder : public TxnDetails {
+    public:
+        TxnBase * accept(TxnFactory *) override;
         public:
             MMOrder& clear();
             MMOrder& buy();

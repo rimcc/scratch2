@@ -5,8 +5,8 @@
 #ifndef NEWTESTFRMWK_TXN_H
 #define NEWTESTFRMWK_TXN_H
 
-class AmpTransReqImpl;
 class FIXTransReqImpl;
+class AmpTransReqImpl;
 
 namespace txn {
     class Order;
@@ -56,6 +56,10 @@ struct TxnTraits<class FIXTxn>
     using implType = FIXTransReqImpl;
 };
 class FIXTxn : public Txn<FIXTxn> {
+public:
+    FIXTxn();
+    template<class T>
+    void make(T const&);
 public:
     typename TxnTraits<FIXTxn>::implType* txnImpl_{};
 };

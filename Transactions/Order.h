@@ -5,8 +5,14 @@
 #ifndef NEWTESTFRMWK_ORDER_H
 #define NEWTESTFRMWK_ORDER_H
 
+#include "TxnDetails.h"
+class TxnBase;
+
 namespace txn {
-    class Order {
+    class Order : public TxnDetails {
+    public:
+        TxnBase* accept(TxnFactory*) override;
+
     public:
         Order& clear();
         Order& buy();

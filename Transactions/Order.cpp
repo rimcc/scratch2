@@ -3,8 +3,13 @@
 //
 
 #include "Order.h"
+#include "TxnFactory.h"
 
 namespace txn {
+    TxnBase* Order::accept(TxnFactory *f)
+    {
+        return f->create(*this);
+    }
     Order&
     Order::buy()
     { m_buysell = 0; return *this; }
