@@ -16,5 +16,5 @@ void
 AmpSessionImpl::transaction(AmpTxn& transRequest)
 {
     AmpTransReqImpl* ampTransRequest{transRequest.get_txn()};
-    session_.transction(ampTransRequest->ampTransRequest_);
+    session_.transaction(ampTransRequest->ampTransRequest_);
 }

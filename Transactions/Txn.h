@@ -5,13 +5,22 @@
 #ifndef NEWTESTFRMWK_TXN_H
 #define NEWTESTFRMWK_TXN_H
 
-struct TxnBase {};
-
 class AmpTransReqImpl;
 class FIXTransReqImpl;
 
+namespace txn {
+    class Order;
+    class MMOrder;
+}
+
+
 template <typename X>
 struct TxnTraits;
+
+struct TxnBase {
+public:
+    virtual ~TxnBase() {} ;
+};
 
 template<typename TxnType>
 class Txn : public TxnBase {
@@ -20,6 +29,7 @@ public:
         TxnType& d = static_cast<TxnType&>(*this);
         return d.txnImpl_;
     }
+
 private:
     Txn() = default;
     friend TxnType;
@@ -33,8 +43,11 @@ struct TxnTraits<class AmpTxn>
 
 class AmpTxn : public Txn<AmpTxn> {
 public:
-    AmpTxn() : txnImpl_() {}
-    typename TxnTraits<AmpTxn>::implType* txnImpl_;
+    AmpTxn();
+    template<class T>
+    void make(T const&);
+public:
+    typename TxnTraits<AmpTxn>::implType* txnImpl_{};
 };
 
 template<>
@@ -44,8 +57,7 @@ struct TxnTraits<class FIXTxn>
 };
 class FIXTxn : public Txn<FIXTxn> {
 public:
-    FIXTxn() : txnImpl_() {}
-    typename TxnTraits<FIXTxn>::implType* txnImpl_;
+    typename TxnTraits<FIXTxn>::implType* txnImpl_{};
 };
 
 

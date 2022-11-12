@@ -1,28 +1,24 @@
 #include "Session/Session.h"
 #include "Transactions/Txn.h"
 #include "Transactions/Order.h"
+#include "Transactions/MMOrder.h"
+#include "Transactions/OrderFactory.h"
+#include "Transactions/MMOrderFactory.h"
 
 int main() {
     TSMRSession ts("config.ini");
     ts.logon();
 
-    txn::Order order = txn::Order().buy().instrument("A-EUR 10Y").trader("MrX").price(123).qty(456);
+    auto order = txn::Order().buy().instrument("A-EUR 10Y").trader("MrX").price(123).qty(456);
+    OrderFactory of;
+    TxnBase* ordTxn = of.createTxn(order);
 
-/*
-orderDetails od = buy().price(123).qty(456).instrument("ABC").trader("MrX");
-OrderTXNFactory of;
-while (true)
-{
-  TxnBase* ordTxn = of.create_txn(od);
-  ts.txn(ordTxn);
-  od.price(newPrice);
-}
-*/
+    auto mmorder = txn::MMOrder().buy().instrument("A-B").trader("XY").price(124).qty(457);
+    MMOrderFactory mmof;
+    TxnBase* mmOrdTxn = mmof.createTxn(mmorder);
 
-
-AmpTxn at;
-
-    ts.txn(at);
+    ts.txn(*ordTxn);
+    ts.txn(*mmOrdTxn);
 
     return 0;
 }

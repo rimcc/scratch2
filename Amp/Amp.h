@@ -13,9 +13,9 @@ namespace Amp {
 
     class AmpTransRequest {
     public:
-        int field1;
-        int field2;
-        const char* name;
+        int field1{};
+        int field2{};
+        const char* name{};
         void do_txn();
     };
 
@@ -23,7 +23,7 @@ namespace Amp {
     public:
         AmpSession(char const*);
         char const* session;
-        void transction(AmpTransRequest&);
+        void transaction(AmpTransRequest &t);
     };
 }
 

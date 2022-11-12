@@ -6,13 +6,8 @@
 #define NEWTESTFRMWK_ORDER_H
 
 namespace txn {
-
-    class OrderBuilder;
-
     class Order {
     public:
-        Order() = default;
-
         Order& clear();
         Order& buy();
         Order& sell();

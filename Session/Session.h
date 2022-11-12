@@ -13,6 +13,7 @@ class Session {
 public:
     virtual void logon() = 0;
     virtual void subscribe() = 0;
+
     virtual void txn(TxnBase&) = 0;
 };
 

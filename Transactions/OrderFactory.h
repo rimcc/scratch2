@@ -7,20 +7,18 @@
 
 #include "Order.h"
 
-//#include "Txn.h"
 class TxnBase;
 
 class OrderFactory {
 public:
-    OrderFactory() = default;
-    TxnBase& createTxn(txn::Order&);
-
+    virtual ~OrderFactory() {};
+    TxnBase* createTxn(txn::Order const&);
 private:
 
 
 };
 
-class FIXOrderFactory : public OrderFactory
-        {};
+class FIXOrderFactory : public OrderFactory {
+};
 
 #endif //NEWTESTFRMWK_ORDERFACTORY_H

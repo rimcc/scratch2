@@ -6,7 +6,7 @@
 namespace Amp {
     AmpSession::AmpSession(char const* c) : session(c) {}
 
-    void AmpSession::transction(Amp::AmpTransRequest &t) {
+    void AmpSession::transaction(Amp::AmpTransRequest &t) {
         t.do_txn();
     }
 
@@ -14,5 +14,6 @@ namespace Amp {
     AmpQueryReply::do_rep() { std::cout << "AmpQueryReply: do_rep\n"; }
 
     void
-    AmpTransRequest::do_txn() { std::cout << "AmpTransRequest: do_txn()\n";}
+    AmpTransRequest::do_txn() { std::cout << "AmpTransRequest: do_txn(): "
+    << name << " : " << field1 << " : " << field2 <<"\n";}
 }

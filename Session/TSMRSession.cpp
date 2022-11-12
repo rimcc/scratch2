@@ -25,5 +25,12 @@ TSMRSession::subscribe()
 void
 TSMRSession::txn(TxnBase &t)
 {
-    session_->transaction(static_cast<AmpTxn&>(t));
+    try {
+        Txn<AmpTxn> &d = dynamic_cast<Txn<AmpTxn> &>(t);
+        session_->transaction(static_cast<AmpTxn &>(d));
+    }
+    catch (std::bad_cast& e)
+    {
+        std::cout << "Bad cast " << typeid(t).name() << "\n";
+    }
 }
