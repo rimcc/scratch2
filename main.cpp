@@ -9,7 +9,7 @@ int main() {
     TSMRSession ts("config.ini");
     ts.logon();
 
-    auto order = txn::Order().buy().instrument("A-EUR 10Y").trader("MrX").price(123).qty(456);
+    auto order = txn::Order().buy().instrument("A-Y").trader("MrX").price(123).qty(456);
     OrderFactory of;
     TxnBase* ordTxn = of.createTxn(order);
 
